@@ -5,7 +5,13 @@ const cors = require("cors");
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+
+// ✅ Fix CORS issue
+app.use(cors({
+    origin: "https://au-ingenium-chatbot-frontend.vercel.app", // Allow only your frontend
+    methods: "GET, POST, OPTIONS",
+    allowedHeaders: "Content-Type, Authorization"
+}));
 
 // Check for missing API key
 const API_KEY = process.env.MISTRAL_API_KEY;
